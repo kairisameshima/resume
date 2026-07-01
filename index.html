@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Kairi Sameshima — senior backend & platform engineer. AI infrastructure, workflow orchestration, and engineering standards.">
+<title>Kairi Sameshima — Backend & Platform Engineer</title>
+<style>
+  :root {
+    --ink:      #141210;   /* warm charcoal ground */
+    --ink-2:    #1d1a16;
+    --panel:    #1b1814;
+    --line:     #322c24;
+    --text:     #ece6db;   /* warm off-white */
+    --text-2:   #b3aa9b;
+    --text-3:   #7d7566;
+    --amber:    #e0a24b;   /* signal accent */
+    --amber-dim:#a9803f;
+    --steel:    #7fa2b3;   /* cool secondary (links, edges) */
+    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    --disp: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; background: var(--ink); color: var(--text);
+    font-family: var(--body); line-height: 1.65; -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: var(--steel); text-decoration: none; }
+  a:hover { color: var(--amber); }
+  ::selection { background: var(--amber); color: var(--ink); }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+
+  /* ---------- nav ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(10px);
+    background: color-mix(in srgb, var(--ink) 82%, transparent);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .brand { font-family: var(--mono); font-size: 14px; letter-spacing: 0.02em; color: var(--text); }
+  .brand b { color: var(--amber); font-weight: 600; }
+  .navlinks { display: flex; gap: 26px; }
+  .navlinks a {
+    font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.04em;
+    color: var(--text-3); position: relative; padding: 4px 0;
+  }
+  .navlinks a .n { color: var(--amber-dim); margin-right: 5px; }
+  .navlinks a:hover, .navlinks a.active { color: var(--text); }
+  .navlinks a.active::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--amber);
+  }
+  @media (max-width: 680px) { .navlinks { display: none; } }
+
+  /* ---------- hero ---------- */
+  .hero { position: relative; min-height: 88vh; display: flex; align-items: center; overflow: hidden; }
+  #graph { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+  .hero-grad { position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: radial-gradient(120% 90% at 78% 20%, transparent 40%, var(--ink) 82%),
+                linear-gradient(180deg, transparent 60%, var(--ink) 100%); }
+  .hero .wrap { position: relative; z-index: 2; }
+  .kicker { font-family: var(--mono); font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber); }
+  .hero h1 {
+    font-family: var(--disp); font-weight: 800; letter-spacing: -0.03em; line-height: 1.0;
+    font-size: clamp(40px, 8vw, 88px); margin: 18px 0 0; text-wrap: balance; max-width: 15ch;
+  }
+  .hero h1 .accent { color: var(--amber); }
+  .hero .lede { font-size: clamp(17px, 2.2vw, 21px); color: var(--text-2); max-width: 56ch; margin: 24px 0 0; }
+  .hero .cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+  .btn {
+    font-family: var(--mono); font-size: 13px; letter-spacing: 0.03em; padding: 12px 20px;
+    border: 1px solid var(--line); border-radius: 3px; color: var(--text); cursor: pointer;
+    transition: border-color .2s, color .2s, background .2s; background: transparent;
+  }
+  .btn:hover { border-color: var(--amber); color: var(--amber); }
+  .btn.primary { background: var(--amber); color: var(--ink); border-color: var(--amber); font-weight: 600; }
+  .btn.primary:hover { background: transparent; color: var(--amber); }
+
+  /* ---------- sections ---------- */
+  section { padding: 96px 0; border-top: 1px solid var(--line); }
+  .sec-label { display: flex; align-items: baseline; gap: 14px; margin-bottom: 40px; }
+  .sec-label .num { font-family: var(--mono); font-size: 13px; color: var(--amber); }
+  .sec-label h2 { font-family: var(--disp); font-weight: 800; letter-spacing: -0.02em; font-size: clamp(26px, 4vw, 38px); margin: 0; }
+  .sec-label .rule { flex: 1; height: 1px; background: var(--line); align-self: center; }
+
+  .about { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; }
+  .about p { font-size: 17.5px; color: var(--text-2); margin: 0 0 18px; max-width: 60ch; }
+  .about p strong { color: var(--text); font-weight: 600; }
+  .about .side { font-family: var(--mono); font-size: 13px; color: var(--text-3); }
+  .about .side dt { color: var(--amber-dim); margin-top: 16px; }
+  .about .side dd { margin: 4px 0 0; color: var(--text-2); }
+  @media (max-width: 760px) { .about { grid-template-columns: 1fr; gap: 28px; } }
+
+  /* ---------- filters + work ---------- */
+  .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
+  .filter {
+    font-family: var(--mono); font-size: 12.5px; padding: 8px 15px; border: 1px solid var(--line);
+    border-radius: 40px; background: transparent; color: var(--text-3); cursor: pointer; transition: all .18s;
+  }
+  .filter:hover { color: var(--text); border-color: var(--text-3); }
+  .filter.active { color: var(--ink); background: var(--amber); border-color: var(--amber); font-weight: 600; }
+
+  .work { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  @media (max-width: 760px) { .work { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 26px 26px 22px;
+    display: flex; flex-direction: column; transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+  }
+  .card:hover { transform: translateY(-4px); border-color: var(--amber-dim); box-shadow: 0 14px 40px -20px rgba(0,0,0,.8); }
+  .card .cat { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber); }
+  .card h3 { font-family: var(--disp); font-weight: 700; letter-spacing: -0.01em; font-size: 21px; margin: 10px 0 0; }
+  .card p { font-size: 15px; color: var(--text-2); margin: 12px 0 18px; flex: 1; }
+  .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .tag { font-family: var(--mono); font-size: 11px; color: var(--text-3); border: 1px solid var(--line); border-radius: 3px; padding: 3px 8px; }
+  .card.hide { display: none; }
+
+  /* ---------- experience ---------- */
+  .timeline { position: relative; margin-left: 8px; }
+  .job { display: grid; grid-template-columns: 170px 1fr; gap: 28px; padding: 0 0 40px 26px; position: relative; border-left: 1px solid var(--line); }
+  .job:last-child { padding-bottom: 0; }
+  .job::before { content: ""; position: absolute; left: -6px; top: 4px; width: 11px; height: 11px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 0 4px var(--ink); }
+  .job .when { font-family: var(--mono); font-size: 13px; color: var(--text-3); }
+  .job h3 { font-family: var(--disp); font-weight: 700; font-size: 19px; margin: 0; }
+  .job .org { color: var(--amber); font-family: var(--mono); font-size: 13px; margin-top: 3px; }
+  .job ul { margin: 12px 0 0; padding-left: 18px; color: var(--text-2); font-size: 15px; }
+  .job li { margin: 6px 0; }
+  @media (max-width: 680px) { .job { grid-template-columns: 1fr; gap: 6px; } }
+
+  /* ---------- skills ---------- */
+  .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  @media (max-width: 760px) { .skills { grid-template-columns: 1fr; } }
+  .skillgroup h4 { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber-dim); margin: 0 0 12px; }
+  .skillgroup .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { font-size: 13.5px; color: var(--text-2); border: 1px solid var(--line); border-radius: 4px; padding: 5px 11px; transition: all .16s; }
+  .chip:hover { color: var(--amber); border-color: var(--amber-dim); }
+
+  /* ---------- education + contact ---------- */
+  .edu { font-size: 17px; color: var(--text-2); }
+  .edu b { color: var(--text); }
+  .contact { text-align: center; padding: 110px 0; }
+  .contact h2 { font-family: var(--disp); font-weight: 800; letter-spacing: -0.02em; font-size: clamp(30px, 6vw, 54px); margin: 0; text-wrap: balance; }
+  .contact p { color: var(--text-2); max-width: 46ch; margin: 20px auto 0; font-size: 17px; }
+  .contact .links { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; margin-top: 34px; }
+  footer { border-top: 1px solid var(--line); padding: 28px 0; }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-family: var(--mono); font-size: 12px; color: var(--text-3); }
+
+  /* ---------- reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+  :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+</style>
+
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <span class="brand">kairi<b>.</b>sameshima</span>
+    <div class="navlinks">
+      <a href="#about"><span class="n">01</span>about</a>
+      <a href="#work"><span class="n">02</span>work</a>
+      <a href="#experience"><span class="n">03</span>experience</a>
+      <a href="#skills"><span class="n">04</span>skills</a>
+      <a href="#contact"><span class="n">05</span>contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <canvas id="graph"></canvas>
+  <div class="hero-grad"></div>
+  <div class="wrap">
+    <span class="kicker">Backend &amp; Platform Engineer · NYC</span>
+    <h1>I build the <span class="accent">platforms &amp; standards</span> AI products stand on.</h1>
+    <p class="lede">Senior backend engineer working the v1→v2 quality bridge in AI startups — orchestration platforms, agentic retrieval and source-verification systems, and the engineering standards that keep a fast-moving microservice fleet from fraying.</p>
+    <div class="cta">
+      <a class="btn primary" href="#work">See selected work</a>
+      <a class="btn" href="#contact">Get in touch</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-label reveal"><span class="num">01</span><h2>About</h2><span class="rule"></span></div>
+      <div class="about">
+        <div class="reveal">
+          <p>I'm a senior backend engineer specializing in <strong>production Python for AI/LLM systems</strong> — retrieval agents, source verification, and the gateway layer that fronts them. Seven-plus years across startups and agencies, with a consistent through-line: Domain-Driven Design, workflow orchestration, and developer-productivity tooling.</p>
+          <p>At Farsight AI I own several services end-to-end and deliberately work the <strong>v1→v2 quality bridge</strong> — the gap where most startup MVPs die. My bet is that engineering quality is a <strong>tooling and standards problem, not a meeting problem</strong>: I'd rather encode a pattern into a scaffold, a CI gate, or an agent plugin than write another doc no one reads.</p>
+          <p>Lately that's meant authoring a company-wide Temporal standard and driving a shared workflow platform to production-grade security and reliability — the unglamorous foundation everything else runs on.</p>
+        </div>
+        <dl class="side reveal">
+          <dt>// role</dt><dd>Senior Backend Engineer</dd>
+          <dt>// focus</dt><dd>AI infra · orchestration · standards</dd>
+          <dt>// trajectory</dt><dd>Staff IC — tools, standards, process</dd>
+          <dt>// based</dt><dd>New York metro</dd>
+          <dt>// stack</dt><dd>Python · Temporal · AWS · LLMs</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-label reveal"><span class="num">02</span><h2>Selected Work</h2><span class="rule"></span></div>
+      <div class="filters reveal">
+        <button class="filter active" data-filter="all">All</button>
+        <button class="filter" data-filter="platform">Platform &amp; Infra</button>
+        <button class="filter" data-filter="ai">AI &amp; Retrieval</button>
+        <button class="filter" data-filter="tooling">Tooling &amp; Standards</button>
+      </div>
+      <div class="work">
+
+        <article class="card reveal" data-cat="platform tooling">
+          <span class="cat">Platform &amp; Infra</span>
+          <h3>Temporal Platform &amp; Standard</h3>
+          <p>Authored my company's Temporal standard and drove the shared workflow platform to production-readiness single-handed — migrated the stack to config-driven CDK, then hardened it end-to-end: Secrets Manager with credential rotation, per-service least-privilege IAM, KMS encryption, TLS, automated failover recovery, and CI security gates.</p>
+          <div class="tags"><span class="tag">Temporal</span><span class="tag">AWS CDK</span><span class="tag">ECS</span><span class="tag">RDS</span><span class="tag">KMS</span><span class="tag">IAM</span></div>
+        </article>
+
+        <article class="card reveal" data-cat="ai">
+          <span class="cat">AI &amp; Retrieval</span>
+          <h3>Agentic Research Agent</h3>
+          <p>Owned end-to-end an agentic research service that answers financial and open-domain questions by orchestrating multi-turn tool calls across SEC filings, market data, and web search — streaming cited answers over SSE with character-level citations and quick/deep LLM modes. Migrated it from a Lambda prototype to a Temporal multi-worker pipeline and built its eval + load-test harnesses.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Temporal</span><span class="tag">Claude / Bedrock</span><span class="tag">SSE</span></div>
+        </article>
+
+        <article class="card reveal" data-cat="ai">
+          <span class="cat">AI &amp; Retrieval</span>
+          <h3>Source Verification Service</h3>
+          <p>Sole author of a microservice that extracts factual claims from documents and verifies each against retrieved evidence via a two-phase Temporal workflow — producing verified / rejected / uncertain verdicts with citations. Built a golden-set evaluation harness with replay and sweep modes for data-driven ship decisions.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Temporal</span><span class="tag">LLM eval</span><span class="tag">Langfuse</span><span class="tag">Clean Arch</span></div>
+        </article>
+
+        <article class="card reveal" data-cat="platform">
+          <span class="cat">Platform &amp; Infra</span>
+          <h3>Multi-Provider LLM Gateway</h3>
+          <p>Unified Anthropic (Bedrock), Google Gemini, and Azure/OpenAI behind one API — structured outputs, function calling, async job queuing, and Redis-Streams SSE — then led its cross-cloud migration. Drove the service to 99% test coverage (665 hermetic tests) and resolved a production memory leak under sustained load.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Redis</span><span class="tag">Multi-cloud</span><span class="tag">99% coverage</span></div>
+        </article>
+
+        <article class="card reveal" data-cat="ai platform">
+          <span class="cat">AI &amp; Retrieval</span>
+          <h3>AI Monitoring Service</h3>
+          <p>Scheduled AI monitoring over financial and web sources: LLM-based story evaluation and deduplication, with email notifications on material events. Led the Celery→Temporal migration, added SDK-metrics-based worker liveness, and re-architected the service to Clean Architecture with an async Unit-of-Work pattern.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Temporal</span><span class="tag">Gemini</span><span class="tag">PostgreSQL</span><span class="tag">DDD</span></div>
+        </article>
+
+        <article class="card reveal" data-cat="tooling">
+          <span class="cat">Tooling &amp; Standards</span>
+          <h3>Standards as Tooling</h3>
+          <p>Turned engineering standards into things engineers actually run: authored the Temporal standard, a config-driven CDK standard, and a new-service scaffold template — then shipped internal Claude Code plugins that audit, check, and scaffold against those specs. Standards out of unread docs, into the toolchain.</p>
+          <div class="tags"><span class="tag">TypeScript</span><span class="tag">AWS CDK</span><span class="tag">CLI</span><span class="tag">Claude Code</span><span class="tag">Templates</span></div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-label reveal"><span class="num">03</span><h2>Experience</h2><span class="rule"></span></div>
+      <div class="timeline">
+        <div class="job reveal">
+          <div class="when">2025 — present</div>
+          <div>
+            <h3>Senior Backend Engineer</h3>
+            <div class="org">Farsight AI · New York (remote)</div>
+            <ul>
+              <li>Own a research / retrieval / verification microservice stack end-to-end — the research agent, source-checker, monitoring, and email services.</li>
+              <li>Authored the company-wide Temporal standard and drove the shared workflow platform to production-grade security and reliability.</li>
+              <li>Encode engineering standards into reusable tooling — service scaffolds, config-driven CDK, and internal Claude Code plugins.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="job reveal">
+          <div class="when">2021 — 2024</div>
+          <div>
+            <h3>Software Engineer / Tech Lead</h3>
+            <div class="org">RippleMatch · New York (remote)</div>
+            <ul>
+              <li>Led multi-sprint features end-to-end on a Python/Flask backend under Domain-Driven Design.</li>
+              <li>Built CLI tools (DDD scaffolding, local DB backups) that saved an estimated ~1,000 engineer-hours annually.</li>
+              <li>Designed error-handling and logging for third-party ATS integrations, reaching a 99% error-resolution rate.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="job reveal">
+          <div class="when">2019 — 2021</div>
+          <div>
+            <h3>Software Engineer</h3>
+            <div class="org">Lockard &amp; Wechsler Direct · New York</div>
+            <ul>
+              <li>Spearheaded an agency-wide linear media-attribution algorithm — a 98% performance improvement with more accurate campaign tracking.</li>
+              <li>Built automated Python ETL across email, FTP, Google Analytics, and BigQuery; delivered BI via SSRS and Tableau.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-label reveal"><span class="num">04</span><h2>Skills</h2><span class="rule"></span></div>
+      <div class="skills">
+        <div class="skillgroup reveal">
+          <h4>Languages &amp; Backend</h4>
+          <div class="chips">
+            <span class="chip">Python</span><span class="chip">TypeScript</span><span class="chip">SQL</span><span class="chip">Go</span>
+            <span class="chip">FastAPI</span><span class="chip">Celery</span><span class="chip">Temporal</span><span class="chip">Pydantic</span><span class="chip">DDD / Clean Arch</span>
+          </div>
+        </div>
+        <div class="skillgroup reveal">
+          <h4>AI / LLM</h4>
+          <div class="chips">
+            <span class="chip">Claude / Bedrock</span><span class="chip">Gemini</span><span class="chip">Azure / OpenAI</span>
+            <span class="chip">Agentic retrieval</span><span class="chip">LLM evaluation</span><span class="chip">Langfuse</span><span class="chip">RAG / OCR</span>
+          </div>
+        </div>
+        <div class="skillgroup reveal">
+          <h4>Infra &amp; Data</h4>
+          <div class="chips">
+            <span class="chip">AWS (ECS/RDS/S3/Lambda)</span><span class="chip">AWS CDK</span><span class="chip">Docker</span><span class="chip">GitHub Actions</span>
+            <span class="chip">PostgreSQL</span><span class="chip">Redis</span><span class="chip">Kafka / SQS</span><span class="chip">Sentry / Prometheus</span>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:44px" class="reveal">
+        <div class="sec-label"><span class="num">05</span><h2>Education</h2><span class="rule"></span></div>
+        <p class="edu"><b>New York University</b> — BA, Computer Science · 2018 · GPA 3.8</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div class="reveal">
+        <h2>Let's build something durable.</h2>
+        <p>Open to senior / staff backend and platform roles where tooling, standards, and process are treated as first-class engineering.</p>
+        <div class="links">
+          <a class="btn primary" href="mailto:kairisameshima@gmail.com">kairisameshima@gmail.com</a>
+          <a class="btn" href="https://www.linkedin.com/in/kairi-sameshima/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://github.com/kairisameshima" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Kairi Sameshima</span>
+    <span>Built as a static page · hosted on GitHub Pages</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---- scroll reveal ---- */
+  var revs = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window && !reduce) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    revs.forEach(function (r) { io.observe(r); });
+  } else {
+    revs.forEach(function (r) { r.classList.add("in"); });
+  }
+
+  /* ---- scroll-spy nav ---- */
+  var links = Array.prototype.slice.call(document.querySelectorAll(".navlinks a"));
+  var secs = links.map(function (l) { return document.querySelector(l.getAttribute("href")); });
+  if ("IntersectionObserver" in window) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          var id = "#" + e.target.id;
+          links.forEach(function (l) { l.classList.toggle("active", l.getAttribute("href") === id); });
+        }
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    secs.forEach(function (s) { if (s) spy.observe(s); });
+  }
+
+  /* ---- project filter ---- */
+  var filters = document.querySelectorAll(".filter");
+  var cards = document.querySelectorAll(".work .card");
+  filters.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      filters.forEach(function (b) { b.classList.remove("active"); });
+      btn.classList.add("active");
+      var f = btn.getAttribute("data-filter");
+      cards.forEach(function (c) {
+        var show = f === "all" || c.getAttribute("data-cat").indexOf(f) !== -1;
+        c.classList.toggle("hide", !show);
+      });
+    });
+  });
+
+  /* ---- hero workflow-graph animation ---- */
+  var canvas = document.getElementById("graph");
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext("2d");
+  var W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var nodes = [], edges = [], pulses = [];
+
+  function build() {
+    var rect = canvas.getBoundingClientRect();
+    W = rect.width; H = rect.height;
+    canvas.width = W * dpr; canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    // layered DAG: columns of nodes, edges flow left→right (like a workflow)
+    nodes = [];
+    var cols = 5, colGap = W / (cols + 1);
+    for (var c = 0; c < cols; c++) {
+      var count = 2 + ((c * 7 + 3) % 3); // 2-4 nodes per column, deterministic
+      for (var i = 0; i < count; i++) {
+        nodes.push({
+          x: colGap * (c + 1) + (((c + i) % 2) ? 14 : -10),
+          y: H * (i + 1) / (count + 1) + ((c % 2) ? 18 : -12),
+          col: c, r: 2.4 + (i % 2)
+        });
+      }
+    }
+    edges = [];
+    nodes.forEach(function (a) {
+      nodes.forEach(function (b) {
+        if (b.col === a.col + 1) edges.push({ a: a, b: b });
+      });
+    });
+    pulses = [];
+  }
+
+  function spawn() {
+    if (reduce) return;
+    if (pulses.length < 18 && edges.length) {
+      var e = edges[(Math.floor(perf() / 240) + pulses.length) % edges.length];
+      pulses.push({ e: e, t: 0, sp: 0.006 + (pulses.length % 3) * 0.002 });
+    }
+  }
+  function perf() { return (window.performance && performance.now) ? performance.now() : 0; }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    // edges
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(127,162,179,0.10)";
+    edges.forEach(function (e) {
+      ctx.beginPath(); ctx.moveTo(e.a.x, e.a.y); ctx.lineTo(e.b.x, e.b.y); ctx.stroke();
+    });
+    // pulses traveling along edges
+    for (var i = pulses.length - 1; i >= 0; i--) {
+      var p = pulses[i]; p.t += p.sp;
+      if (p.t >= 1) { pulses.splice(i, 1); continue; }
+      var x = p.e.a.x + (p.e.b.x - p.e.a.x) * p.t;
+      var y = p.e.a.y + (p.e.b.y - p.e.a.y) * p.t;
+      var g = ctx.createRadialGradient(x, y, 0, x, y, 14);
+      g.addColorStop(0, "rgba(224,162,75,0.55)");
+      g.addColorStop(1, "rgba(224,162,75,0)");
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 14, 0, 6.2832); ctx.fill();
+      ctx.fillStyle = "rgba(236,230,219,0.9)"; ctx.beginPath(); ctx.arc(x, y, 1.6, 0, 6.2832); ctx.fill();
+    }
+    // nodes
+    nodes.forEach(function (n) {
+      ctx.fillStyle = "rgba(179,170,155,0.35)";
+      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, 6.2832); ctx.fill();
+    });
+  }
+
+  var last = 0;
+  function loop(ts) {
+    if (ts - last > 200) { spawn(); last = ts; }
+    draw();
+    requestAnimationFrame(loop);
+  }
+
+  build();
+  if (reduce) { draw(); } else { requestAnimationFrame(loop); }
+  var rt;
+  window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(function () { build(); if (reduce) draw(); }, 180); });
+})();
+</script>
+</body>
+</html>
