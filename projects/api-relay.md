@@ -4,9 +4,9 @@ slug: api-relay
 name: API Relay (LLM Relay)
 employer: Farsight AI
 role: sole owner and primary engineer
-period: 2025-07 — 2026-05
+period: 2025-07 — 2026-06
 status: active
-commits_by_kairi: 158
+commits_by_kairi: 159
 primary_languages: [Python]
 technologies: [FastAPI, Uvicorn, Redis, arq, Pydantic v2, OpenAI SDK, Google GenAI SDK, Anthropic Bedrock SDK, Temporal, AWS CDK, GCP Vertex AI, Docker, Ruff, pytest, pytest-cov, Prometheus]
 domains: [LLM gateway, async job processing, streaming, multi-provider AI, infrastructure]

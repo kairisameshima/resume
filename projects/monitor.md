@@ -18,6 +18,7 @@ visibility: internal
 ## What it is
 An AI-powered monitoring service that runs configurable, scheduled queries against financial and web data sources (SEC filings, earnings transcripts, web search), uses Google Gemini to evaluate and deduplicate stories, and dispatches email notifications to users when material events are detected.
 
+
 ## My role & ownership
 Owner and primary backend engineer. Built the service from initial commit through full production deployment, including the initial Celery-based architecture and a complete migration to Temporal, plus all CDK infrastructure.
 

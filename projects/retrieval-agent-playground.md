@@ -4,12 +4,12 @@ slug: retrieval-agent-playground
 name: Retrieval Agent (Research Agent)
 employer: Farsight AI
 role: primary owner
-period: 2025-09 — 2026-06
+period: 2025-09 — 2026-07
 status: active
-commits_by_kairi: 370
+commits_by_kairi: 429
 primary_languages: [Python, TypeScript]
-technologies: [FastAPI, Temporal, AWS Bedrock, Claude (Sonnet 4 / Opus 4), AWS CDK, ECS Fargate, ElastiCache Redis, DynamoDB, Cohere, SEC EDGAR, Exa, S3, Sentry, auditry/structlog, Poetry, ruff, ty (astral), GitHub Actions]
-domains: [agentic-retrieval, financial-research, LLM-orchestration, streaming-APIs, observability, eval-infra, cloud-infra]
+technologies: [FastAPI, Temporal, AWS Bedrock, Claude (Sonnet 4 / Opus 4), AWS CDK, ECS Fargate, ElastiCache Redis, DynamoDB, AWS Secrets Manager, AWS KMS, AWS WAF, CloudWatch, AWS ECR, Cohere, SEC EDGAR, Exa, S3, Sentry, Langfuse, auditry/structlog, Poetry, ruff, ty (astral), trivy, GitHub Actions]
+domains: [agentic-retrieval, financial-research, LLM-orchestration, streaming-APIs, observability, eval-infra, cloud-infra, security, reliability / DR]
 visibility: internal
 ---
 
@@ -36,6 +36,15 @@ Primary owner from the ground up. Drove the full arc: initial Lambda-based proto
 - **Eval infrastructure:** Built DynamoDB-backed test-case management with versioned ratings, per-backend-version pass-rate analysis (`/eval/analysis/summary`), and snapshot capture for regression tracking.
 - **`/debug/config` endpoint and SSM consolidation (DEV-1105 / DEV-979):** Added runtime config inspection endpoint; consolidated SSM params into a config-driven CDK naming scheme and renamed `DEVELOPER` → `DEPLOYMENT_SLUG`.
 
+### Production-readiness campaign (June–July 2026, DEV-1297 → DEV-1362)
+Drove the research-agent's own prod-readiness gauntlet — the security, reliability, and supply-chain hardening required before the service can go to production (tracked as a 37-ticket Linear project across Standards / Resiliency / Research-Agent-Specific milestones).
+- **Security posture:** customer-managed KMS CMK with rotation for data-at-rest (DEV-1297); moved vendor API credentials to Secrets Manager with a rotation runbook (DEV-1301/DEV-1302); scoped task-role and execution-role IAM to least privilege, region sourced from config (DEV-1303/DEV-1317); WAF on the playground public ALB (DEV-1318); CORS restricted to an explicit allow-list, no wildcard (DEV-1314); locked down worker egress (DEV-1305); made ECS Exec break-glass rather than standing prod access (DEV-1316); disabled Sentry `send_default_pii` and added a before-send scrubber that redacts non-string sensitive values (DEV-1298).
+- **Supply chain & CI gates:** SCA + SBOM and secret-detection scan gates in CI via trivy (DEV-1299/DEV-1300), remediation of HIGH dependency vulnerabilities (DEV-1362), ECR scan-on-push with an untagged-image lifecycle (DEV-1331), prod promotion gated on tests + scan reports (DEV-1309), and deploy-by-image-digest instead of `:latest` (DEV-1310).
+- **Reliability / DR:** Redis Multi-AZ with automatic failover for prod (DEV-1324), ECS deployment circuit breaker with rollback (DEV-1325), target-tracking autoscaling for API + worker services (DEV-1327), ≥2 API tasks in prod with container health checks (DEV-1328/DEV-1329), and explicit ALB deregistration delay (DEV-1333).
+- **Observability:** prod CloudWatch saturation alarms + SNS on-call topic (DEV-1311), 90-day ECS log-group retention (DEV-1312).
+- **Networking (DEV-1343):** joined the research-agent to the Service Connect mesh for cross-service OAuth access.
+- **Trace hygiene (DEV-1258):** upserted Langfuse traces so workflow runs are no longer orphaned in observability.
+
 ## Technologies & patterns
 
 - **Orchestration:** Temporal Python SDK — deterministic workflow fan-out with `asyncio.gather`, heartbeated long activities, per-role worker split (workflows vs activities containers)
@@ -54,3 +63,4 @@ Primary owner from the ground up. Drove the full arc: initial Lambda-based proto
 - Designed a character-level citation system with div-ID anchoring for SEC EDGAR filings and sentence-level precision for web sources, surfaced as a streaming SSE API consumed by the product frontend.
 - Instrumented per-activity Schedule→Start latency via Temporal history, diagnosed a concurrency cliff under parallel filing load, and tuned worker pools to resolve it — guided by a custom load-test UI with fire-pattern controls.
 - Established CI quality gates (diff-scoped lint/format/type checks, type-checking ratchet with ty, Slack deploy notifications) and a DynamoDB-backed eval framework for tracking response quality across backend versions.
+- Drove the service's production-readiness campaign (DEV-1297 → DEV-1362): KMS CMK encryption, Secrets Manager vendor-credential rotation, least-privilege IAM, WAF, CORS allow-listing, SCA/SBOM/secret CI scan gates, deploy-by-digest with test-gated promotion, Redis Multi-AZ failover, ECS circuit-breaker rollback, autoscaling, and CloudWatch on-call alarming.

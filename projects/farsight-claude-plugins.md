@@ -6,7 +6,7 @@ employer: Farsight AI
 role: author / maintainer
 period: 2026-04 — 2026-06
 status: active
-commits_by_kairi: 14
+commits_by_kairi: 16
 primary_languages:
   - Markdown
   - TypeScript
