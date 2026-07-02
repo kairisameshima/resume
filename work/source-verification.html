@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Source Verification Service — STAR breakdown. Kairi Sameshima.">
+<title>Source Verification Service — Kairi Sameshima</title>
+<link rel="stylesheet" href="../assets/portfolio.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="../index.html">kairi<b>.</b>sameshima</a>
+    <a class="backlink" href="../index.html#work">← all work</a>
+  </div>
+</nav>
+
+<header class="proj-hero">
+  <div class="wrap">
+    <span class="cat">AI &amp; Retrieval · Sole Author</span>
+    <h1>Source Verification Service</h1>
+    <p class="lede">A microservice that extracts factual claims from documents and verifies each against retrieved evidence — producing auditable verdicts with citations.</p>
+    <div class="tags"><span class="tag">Python</span><span class="tag">Temporal</span><span class="tag">Clean Architecture</span><span class="tag">LLM eval</span><span class="tag">Langfuse</span><span class="tag">AWS CDK</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="star">
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">S</div><div class="word">Situation</div></div>
+      <div class="content">
+        <p>AI-generated and analyst-authored content needs its factual claims checked against real evidence — at scale, and with <strong>auditable, defensible verdicts</strong> rather than a black-box yes/no. There was no service that did this systematically.</p>
+      </div>
+    </div>
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">T</div><div class="word">Task</div></div>
+      <div class="content">
+        <p>Design and build — as sole author — a service that ingests documents, extracts their factual claims, and verifies each claim against retrieved evidence, with quality measurable enough to make ship decisions on.</p>
+      </div>
+    </div>
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">A</div><div class="word">Action</div></div>
+      <div class="content">
+        <p>Built the service ground-up on a clean-architecture foundation with a two-phase Temporal workflow — <strong>prepare evidence, then verify each claim</strong> — producing <em>verified / rejected / uncertain</em> verdicts with citations and explanations.</p>
+        <ul>
+          <li>Aligned the verification contract to the companion research-agent's schema and bounded fan-out concurrency to prevent burst overload.</li>
+          <li>Built a golden-set evaluation harness: 63 hand-labeled claims auto-labeled via a frontier model with zero numeric-hallucination failures.</li>
+          <li>Wrote a replay/sweep CLI emitting per-claim latency (p50/p95), agreement-with-golden, cost, and linkable LLM traces — so research-depth variants could be compared on data.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">R</div><div class="word">Result</div></div>
+      <div class="content">
+        <p>A complete, evidence-backed verification service with an evaluation harness that converts "is it accurate enough?" into a measured, repeatable decision — owned end-to-end from the first scaffold commit through infrastructure and CI.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="detail-nav">
+    <a href="research-agent.html">← Research Agent</a>
+    <a href="llm-gateway.html">next: LLM Gateway →</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 Kairi Sameshima</span><span>STAR breakdown</span></div>
+</footer>
+
+<script>
+(function(){var r=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;var els=document.querySelectorAll(".reveal");if("IntersectionObserver"in window&&!r){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:0.12});els.forEach(function(e){io.observe(e);});}else{els.forEach(function(e){e.classList.add("in");});}})();
+</script>
+</body>
+</html>

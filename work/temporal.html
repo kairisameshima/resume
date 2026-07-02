@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Temporal Platform & Standard — STAR breakdown. Kairi Sameshima.">
+<title>Temporal Platform &amp; Standard — Kairi Sameshima</title>
+<link rel="stylesheet" href="../assets/portfolio.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="../index.html">kairi<b>.</b>sameshima</a>
+    <a class="backlink" href="../index.html#work">← all work</a>
+  </div>
+</nav>
+
+<header class="proj-hero">
+  <div class="wrap">
+    <span class="cat">Platform &amp; Infra · Author / Platform Lead</span>
+    <h1>Temporal Platform &amp; Standard</h1>
+    <p class="lede">Authored a company-wide standard for how every service uses Temporal, then drove the shared workflow platform itself to production-grade security and reliability.</p>
+    <div class="tags"><span class="tag">Temporal</span><span class="tag">AWS CDK</span><span class="tag">ECS Fargate</span><span class="tag">RDS</span><span class="tag">Secrets Manager</span><span class="tag">KMS</span><span class="tag">IAM</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="star">
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">S</div><div class="word">Situation</div></div>
+      <div class="content">
+        <p>A fast-moving AI startup was adopting Temporal for workflow orchestration across a fleet of microservices — but every team used it differently, and the shared platform wasn't production-grade. There was no common pattern for clients, retries, or payloads, and the deployment carried real security and reliability gaps that blocked dependent services from shipping to production.</p>
+      </div>
+    </div>
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">T</div><div class="word">Task</div></div>
+      <div class="content">
+        <p>Two connected mandates: <strong>define the standard</strong> for how services use Temporal so the fleet stops diverging, and <strong>make the shared platform production-ready</strong> — the keystone every Temporal-based service depends on.</p>
+      </div>
+    </div>
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">A</div><div class="word">Action</div></div>
+      <div class="content">
+        <p>Authored the company-wide Temporal standard: SDK version pinning, a lazy singleton client, namespace-per-service strategy, category-based retry policies (DB / LLM / API / file / cache), a large-payload offload pattern, worker liveness probes, and graceful shutdown.</p>
+        <p>Then drove the platform to production-readiness single-handed:</p>
+        <ul>
+          <li>Migrated the infrastructure to a config-driven CDK stack, removing the legacy implementation.</li>
+          <li>Hardened security: credentials from a secrets manager with rotation, per-service least-privilege IAM roles, customer-managed KMS encryption at rest, TLS in transit, and least-privilege network egress.</li>
+          <li>Built reliability &amp; DR: reliability-standard health checks, per-environment deletion protection, a 35-day backup strategy with a documented restore runbook, and automated recovery from a database failover mode I diagnosed as wedging the cluster.</li>
+          <li>Added CI security gates — secret and dependency scanning, image scan-on-push, and remediation of all critical/high vulnerabilities.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">R</div><div class="word">Result</div></div>
+      <div class="content">
+        <p>A single referenced standard now governs Temporal usage across all Python services, replacing ad-hoc per-service logic. The shared platform meets production security and reliability bars — <strong>unblocking the dependent services that were queued behind it</strong> — with a documented recovery and restore posture rather than hope.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="detail-nav">
+    <a href="../index.html#work">← all work</a>
+    <a href="research-agent.html">next: Research Agent →</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 Kairi Sameshima</span><span>STAR breakdown</span></div>
+</footer>
+
+<script>
+(function(){var r=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;var els=document.querySelectorAll(".reveal");if("IntersectionObserver"in window&&!r){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:0.12});els.forEach(function(e){io.observe(e);});}else{els.forEach(function(e){e.classList.add("in");});}})();
+</script>
+</body>
+</html>

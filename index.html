@@ -5,163 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Kairi Sameshima — senior backend & platform engineer. AI infrastructure, workflow orchestration, and engineering standards.">
 <title>Kairi Sameshima — Backend & Platform Engineer</title>
-<style>
-  :root {
-    --ink:      #141210;   /* warm charcoal ground */
-    --ink-2:    #1d1a16;
-    --panel:    #1b1814;
-    --line:     #322c24;
-    --text:     #ece6db;   /* warm off-white */
-    --text-2:   #b3aa9b;
-    --text-3:   #7d7566;
-    --amber:    #e0a24b;   /* signal accent */
-    --amber-dim:#a9803f;
-    --steel:    #7fa2b3;   /* cool secondary (links, edges) */
-    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace;
-    --disp: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    --body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-  body {
-    margin: 0; background: var(--ink); color: var(--text);
-    font-family: var(--body); line-height: 1.65; -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
-  a { color: var(--steel); text-decoration: none; }
-  a:hover { color: var(--amber); }
-  ::selection { background: var(--amber); color: var(--ink); }
-
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
-
-  /* ---------- nav ---------- */
-  nav {
-    position: sticky; top: 0; z-index: 50;
-    backdrop-filter: blur(10px);
-    background: color-mix(in srgb, var(--ink) 82%, transparent);
-    border-bottom: 1px solid var(--line);
-  }
-  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
-  .brand { font-family: var(--mono); font-size: 14px; letter-spacing: 0.02em; color: var(--text); }
-  .brand b { color: var(--amber); font-weight: 600; }
-  .navlinks { display: flex; gap: 26px; }
-  .navlinks a {
-    font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.04em;
-    color: var(--text-3); position: relative; padding: 4px 0;
-  }
-  .navlinks a .n { color: var(--amber-dim); margin-right: 5px; }
-  .navlinks a:hover, .navlinks a.active { color: var(--text); }
-  .navlinks a.active::after {
-    content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--amber);
-  }
-  @media (max-width: 680px) { .navlinks { display: none; } }
-
-  /* ---------- hero ---------- */
-  .hero { position: relative; min-height: 88vh; display: flex; align-items: center; overflow: hidden; }
-  #graph { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-  .hero-grad { position: absolute; inset: 0; z-index: 1; pointer-events: none;
-    background: radial-gradient(120% 90% at 78% 20%, transparent 40%, var(--ink) 82%),
-                linear-gradient(180deg, transparent 60%, var(--ink) 100%); }
-  .hero .wrap { position: relative; z-index: 2; }
-  .kicker { font-family: var(--mono); font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--amber); }
-  .hero h1 {
-    font-family: var(--disp); font-weight: 800; letter-spacing: -0.03em; line-height: 1.0;
-    font-size: clamp(40px, 8vw, 88px); margin: 18px 0 0; text-wrap: balance; max-width: 15ch;
-  }
-  .hero h1 .accent { color: var(--amber); }
-  .hero .lede { font-size: clamp(17px, 2.2vw, 21px); color: var(--text-2); max-width: 56ch; margin: 24px 0 0; }
-  .hero .cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
-  .btn {
-    font-family: var(--mono); font-size: 13px; letter-spacing: 0.03em; padding: 12px 20px;
-    border: 1px solid var(--line); border-radius: 3px; color: var(--text); cursor: pointer;
-    transition: border-color .2s, color .2s, background .2s; background: transparent;
-  }
-  .btn:hover { border-color: var(--amber); color: var(--amber); }
-  .btn.primary { background: var(--amber); color: var(--ink); border-color: var(--amber); font-weight: 600; }
-  .btn.primary:hover { background: transparent; color: var(--amber); }
-
-  /* ---------- sections ---------- */
-  section { padding: 96px 0; border-top: 1px solid var(--line); }
-  .sec-label { display: flex; align-items: baseline; gap: 14px; margin-bottom: 40px; }
-  .sec-label .num { font-family: var(--mono); font-size: 13px; color: var(--amber); }
-  .sec-label h2 { font-family: var(--disp); font-weight: 800; letter-spacing: -0.02em; font-size: clamp(26px, 4vw, 38px); margin: 0; }
-  .sec-label .rule { flex: 1; height: 1px; background: var(--line); align-self: center; }
-
-  .about { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; }
-  .about p { font-size: 17.5px; color: var(--text-2); margin: 0 0 18px; max-width: 60ch; }
-  .about p strong { color: var(--text); font-weight: 600; }
-  .about .side { font-family: var(--mono); font-size: 13px; color: var(--text-3); }
-  .about .side dt { color: var(--amber-dim); margin-top: 16px; }
-  .about .side dd { margin: 4px 0 0; color: var(--text-2); }
-  @media (max-width: 760px) { .about { grid-template-columns: 1fr; gap: 28px; } }
-
-  /* ---------- filters + work ---------- */
-  .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
-  .filter {
-    font-family: var(--mono); font-size: 12.5px; padding: 8px 15px; border: 1px solid var(--line);
-    border-radius: 40px; background: transparent; color: var(--text-3); cursor: pointer; transition: all .18s;
-  }
-  .filter:hover { color: var(--text); border-color: var(--text-3); }
-  .filter.active { color: var(--ink); background: var(--amber); border-color: var(--amber); font-weight: 600; }
-
-  .work { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-  @media (max-width: 760px) { .work { grid-template-columns: 1fr; } }
-  .card {
-    background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 26px 26px 22px;
-    display: flex; flex-direction: column; transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
-  }
-  .card:hover { transform: translateY(-4px); border-color: var(--amber-dim); box-shadow: 0 14px 40px -20px rgba(0,0,0,.8); }
-  .card .cat { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber); }
-  .card h3 { font-family: var(--disp); font-weight: 700; letter-spacing: -0.01em; font-size: 21px; margin: 10px 0 0; }
-  .card p { font-size: 15px; color: var(--text-2); margin: 12px 0 18px; flex: 1; }
-  .tags { display: flex; flex-wrap: wrap; gap: 7px; }
-  .tag { font-family: var(--mono); font-size: 11px; color: var(--text-3); border: 1px solid var(--line); border-radius: 3px; padding: 3px 8px; }
-  .card.hide { display: none; }
-
-  /* ---------- experience ---------- */
-  .timeline { position: relative; margin-left: 8px; }
-  .job { display: grid; grid-template-columns: 170px 1fr; gap: 28px; padding: 0 0 40px 26px; position: relative; border-left: 1px solid var(--line); }
-  .job:last-child { padding-bottom: 0; }
-  .job::before { content: ""; position: absolute; left: -6px; top: 4px; width: 11px; height: 11px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 0 4px var(--ink); }
-  .job .when { font-family: var(--mono); font-size: 13px; color: var(--text-3); }
-  .job h3 { font-family: var(--disp); font-weight: 700; font-size: 19px; margin: 0; }
-  .job .org { color: var(--amber); font-family: var(--mono); font-size: 13px; margin-top: 3px; }
-  .job ul { margin: 12px 0 0; padding-left: 18px; color: var(--text-2); font-size: 15px; }
-  .job li { margin: 6px 0; }
-  @media (max-width: 680px) { .job { grid-template-columns: 1fr; gap: 6px; } }
-
-  /* ---------- skills ---------- */
-  .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
-  @media (max-width: 760px) { .skills { grid-template-columns: 1fr; } }
-  .skillgroup h4 { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber-dim); margin: 0 0 12px; }
-  .skillgroup .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .chip { font-size: 13.5px; color: var(--text-2); border: 1px solid var(--line); border-radius: 4px; padding: 5px 11px; transition: all .16s; }
-  .chip:hover { color: var(--amber); border-color: var(--amber-dim); }
-
-  /* ---------- education + contact ---------- */
-  .edu { font-size: 17px; color: var(--text-2); }
-  .edu b { color: var(--text); }
-  .contact { text-align: center; padding: 110px 0; }
-  .contact h2 { font-family: var(--disp); font-weight: 800; letter-spacing: -0.02em; font-size: clamp(30px, 6vw, 54px); margin: 0; text-wrap: balance; }
-  .contact p { color: var(--text-2); max-width: 46ch; margin: 20px auto 0; font-size: 17px; }
-  .contact .links { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; margin-top: 34px; }
-  footer { border-top: 1px solid var(--line); padding: 28px 0; }
-  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-family: var(--mono); font-size: 12px; color: var(--text-3); }
-
-  /* ---------- reveal ---------- */
-  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
-  .reveal.in { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
-
-  :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
-</style>
-
+<link rel="stylesheet" href="assets/portfolio.css">
 </head>
 <body>
+
 <nav>
   <div class="wrap">
-    <span class="brand">kairi<b>.</b>sameshima</span>
+    <a class="brand" href="index.html">kairi<b>.</b>sameshima</a>
     <div class="navlinks">
       <a href="#about"><span class="n">01</span>about</a>
       <a href="#work"><span class="n">02</span>work</a>
@@ -218,47 +68,53 @@
       </div>
       <div class="work">
 
-        <article class="card reveal" data-cat="platform tooling">
+        <a class="card reveal" href="work/temporal.html" data-cat="platform tooling">
           <span class="cat">Platform &amp; Infra</span>
           <h3>Temporal Platform &amp; Standard</h3>
-          <p>Authored my company's Temporal standard and drove the shared workflow platform to production-readiness single-handed — migrated the stack to config-driven CDK, then hardened it end-to-end: Secrets Manager with credential rotation, per-service least-privilege IAM, KMS encryption, TLS, automated failover recovery, and CI security gates.</p>
-          <div class="tags"><span class="tag">Temporal</span><span class="tag">AWS CDK</span><span class="tag">ECS</span><span class="tag">RDS</span><span class="tag">KMS</span><span class="tag">IAM</span></div>
-        </article>
+          <p>Authored my company's Temporal standard and drove the shared workflow platform to production-readiness single-handed — config-driven CDK migration, then end-to-end hardening: Secrets Manager, least-privilege IAM, KMS, TLS, automated failover recovery, and CI security gates.</p>
+          <p class="more">View STAR breakdown →</p>
+          <div class="tags"><span class="tag">Temporal</span><span class="tag">AWS CDK</span><span class="tag">ECS</span><span class="tag">RDS</span><span class="tag">KMS</span></div>
+        </a>
 
-        <article class="card reveal" data-cat="ai">
+        <a class="card reveal" href="work/research-agent.html" data-cat="ai">
           <span class="cat">AI &amp; Retrieval</span>
           <h3>Agentic Research Agent</h3>
-          <p>Owned end-to-end an agentic research service that answers financial and open-domain questions by orchestrating multi-turn tool calls across SEC filings, market data, and web search — streaming cited answers over SSE with character-level citations and quick/deep LLM modes. Migrated it from a Lambda prototype to a Temporal multi-worker pipeline and built its eval + load-test harnesses.</p>
-          <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Temporal</span><span class="tag">Claude / Bedrock</span><span class="tag">SSE</span></div>
-        </article>
+          <p>Owned end-to-end an agentic research service that answers financial and open-domain questions by orchestrating multi-turn tool calls across SEC filings, market data, and web search — streaming cited answers over SSE with character-level citations.</p>
+          <p class="more">View STAR breakdown →</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Temporal</span><span class="tag">Claude / Bedrock</span></div>
+        </a>
 
-        <article class="card reveal" data-cat="ai">
+        <a class="card reveal" href="work/source-verification.html" data-cat="ai">
           <span class="cat">AI &amp; Retrieval</span>
           <h3>Source Verification Service</h3>
-          <p>Sole author of a microservice that extracts factual claims from documents and verifies each against retrieved evidence via a two-phase Temporal workflow — producing verified / rejected / uncertain verdicts with citations. Built a golden-set evaluation harness with replay and sweep modes for data-driven ship decisions.</p>
-          <div class="tags"><span class="tag">Python</span><span class="tag">Temporal</span><span class="tag">LLM eval</span><span class="tag">Langfuse</span><span class="tag">Clean Arch</span></div>
-        </article>
+          <p>Sole author of a microservice that extracts factual claims from documents and verifies each against retrieved evidence via a two-phase Temporal workflow — producing verified / rejected / uncertain verdicts with citations and a golden-set eval harness.</p>
+          <p class="more">View STAR breakdown →</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Temporal</span><span class="tag">LLM eval</span><span class="tag">Langfuse</span></div>
+        </a>
 
-        <article class="card reveal" data-cat="platform">
+        <a class="card reveal" href="work/llm-gateway.html" data-cat="platform">
           <span class="cat">Platform &amp; Infra</span>
           <h3>Multi-Provider LLM Gateway</h3>
-          <p>Unified Anthropic (Bedrock), Google Gemini, and Azure/OpenAI behind one API — structured outputs, function calling, async job queuing, and Redis-Streams SSE — then led its cross-cloud migration. Drove the service to 99% test coverage (665 hermetic tests) and resolved a production memory leak under sustained load.</p>
-          <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Redis</span><span class="tag">Multi-cloud</span><span class="tag">99% coverage</span></div>
-        </article>
+          <p>Unified Anthropic (Bedrock), Google Gemini, and Azure/OpenAI behind one API — structured outputs, function calling, async job queuing, and SSE streaming — then led its cross-cloud migration and drove it to 99% test coverage (665 tests).</p>
+          <p class="more">View STAR breakdown →</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Redis</span><span class="tag">Multi-cloud</span></div>
+        </a>
 
-        <article class="card reveal" data-cat="ai platform">
+        <a class="card reveal" href="work/monitoring.html" data-cat="ai platform">
           <span class="cat">AI &amp; Retrieval</span>
           <h3>AI Monitoring Service</h3>
-          <p>Scheduled AI monitoring over financial and web sources: LLM-based story evaluation and deduplication, with email notifications on material events. Led the Celery→Temporal migration, added SDK-metrics-based worker liveness, and re-architected the service to Clean Architecture with an async Unit-of-Work pattern.</p>
-          <div class="tags"><span class="tag">Python</span><span class="tag">Temporal</span><span class="tag">Gemini</span><span class="tag">PostgreSQL</span><span class="tag">DDD</span></div>
-        </article>
+          <p>Scheduled AI monitoring over financial and web sources: LLM-based story evaluation and deduplication, with email notifications on material events. Led the Celery→Temporal migration and re-architected to Clean Architecture.</p>
+          <p class="more">View STAR breakdown →</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Temporal</span><span class="tag">Gemini</span><span class="tag">PostgreSQL</span></div>
+        </a>
 
-        <article class="card reveal" data-cat="tooling">
+        <a class="card reveal" href="work/standards.html" data-cat="tooling">
           <span class="cat">Tooling &amp; Standards</span>
           <h3>Standards as Tooling</h3>
-          <p>Turned engineering standards into things engineers actually run: authored the Temporal standard, a config-driven CDK standard, and a new-service scaffold template — then shipped internal Claude Code plugins that audit, check, and scaffold against those specs. Standards out of unread docs, into the toolchain.</p>
-          <div class="tags"><span class="tag">TypeScript</span><span class="tag">AWS CDK</span><span class="tag">CLI</span><span class="tag">Claude Code</span><span class="tag">Templates</span></div>
-        </article>
+          <p>Turned engineering standards into things engineers run: authored the Temporal standard, a config-driven CDK standard, and a new-service scaffold — then shipped internal Claude Code plugins that audit, check, and scaffold against those specs.</p>
+          <p class="more">View STAR breakdown →</p>
+          <div class="tags"><span class="tag">TypeScript</span><span class="tag">AWS CDK</span><span class="tag">CLI</span><span class="tag">Claude Code</span></div>
+        </a>
 
       </div>
     </div>
@@ -367,18 +223,14 @@
   "use strict";
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---- scroll reveal ---- */
   var revs = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window && !reduce) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
     }, { threshold: 0.12 });
     revs.forEach(function (r) { io.observe(r); });
-  } else {
-    revs.forEach(function (r) { r.classList.add("in"); });
-  }
+  } else { revs.forEach(function (r) { r.classList.add("in"); }); }
 
-  /* ---- scroll-spy nav ---- */
   var links = Array.prototype.slice.call(document.querySelectorAll(".navlinks a"));
   var secs = links.map(function (l) { return document.querySelector(l.getAttribute("href")); });
   if ("IntersectionObserver" in window) {
@@ -393,7 +245,6 @@
     secs.forEach(function (s) { if (s) spy.observe(s); });
   }
 
-  /* ---- project filter ---- */
   var filters = document.querySelectorAll(".filter");
   var cards = document.querySelectorAll(".work .card");
   filters.forEach(function (btn) {
@@ -408,7 +259,6 @@
     });
   });
 
-  /* ---- hero workflow-graph animation ---- */
   var canvas = document.getElementById("graph");
   if (!canvas || !canvas.getContext) return;
   var ctx = canvas.getContext("2d");
@@ -420,71 +270,38 @@
     W = rect.width; H = rect.height;
     canvas.width = W * dpr; canvas.height = H * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    // layered DAG: columns of nodes, edges flow left→right (like a workflow)
     nodes = [];
     var cols = 5, colGap = W / (cols + 1);
     for (var c = 0; c < cols; c++) {
-      var count = 2 + ((c * 7 + 3) % 3); // 2-4 nodes per column, deterministic
+      var count = 2 + ((c * 7 + 3) % 3);
       for (var i = 0; i < count; i++) {
-        nodes.push({
-          x: colGap * (c + 1) + (((c + i) % 2) ? 14 : -10),
-          y: H * (i + 1) / (count + 1) + ((c % 2) ? 18 : -12),
-          col: c, r: 2.4 + (i % 2)
-        });
+        nodes.push({ x: colGap * (c + 1) + (((c + i) % 2) ? 14 : -10), y: H * (i + 1) / (count + 1) + ((c % 2) ? 18 : -12), col: c, r: 2.4 + (i % 2) });
       }
     }
     edges = [];
-    nodes.forEach(function (a) {
-      nodes.forEach(function (b) {
-        if (b.col === a.col + 1) edges.push({ a: a, b: b });
-      });
-    });
+    nodes.forEach(function (a) { nodes.forEach(function (b) { if (b.col === a.col + 1) edges.push({ a: a, b: b }); }); });
     pulses = [];
   }
-
-  function spawn() {
-    if (reduce) return;
-    if (pulses.length < 18 && edges.length) {
-      var e = edges[(Math.floor(perf() / 240) + pulses.length) % edges.length];
-      pulses.push({ e: e, t: 0, sp: 0.006 + (pulses.length % 3) * 0.002 });
-    }
-  }
-  function perf() { return (window.performance && performance.now) ? performance.now() : 0; }
-
   function draw() {
     ctx.clearRect(0, 0, W, H);
-    // edges
-    ctx.lineWidth = 1;
-    ctx.strokeStyle = "rgba(127,162,179,0.10)";
-    edges.forEach(function (e) {
-      ctx.beginPath(); ctx.moveTo(e.a.x, e.a.y); ctx.lineTo(e.b.x, e.b.y); ctx.stroke();
-    });
-    // pulses traveling along edges
+    ctx.lineWidth = 1; ctx.strokeStyle = "rgba(127,162,179,0.10)";
+    edges.forEach(function (e) { ctx.beginPath(); ctx.moveTo(e.a.x, e.a.y); ctx.lineTo(e.b.x, e.b.y); ctx.stroke(); });
     for (var i = pulses.length - 1; i >= 0; i--) {
       var p = pulses[i]; p.t += p.sp;
       if (p.t >= 1) { pulses.splice(i, 1); continue; }
-      var x = p.e.a.x + (p.e.b.x - p.e.a.x) * p.t;
-      var y = p.e.a.y + (p.e.b.y - p.e.a.y) * p.t;
+      var x = p.e.a.x + (p.e.b.x - p.e.a.x) * p.t, y = p.e.a.y + (p.e.b.y - p.e.a.y) * p.t;
       var g = ctx.createRadialGradient(x, y, 0, x, y, 14);
-      g.addColorStop(0, "rgba(224,162,75,0.55)");
-      g.addColorStop(1, "rgba(224,162,75,0)");
+      g.addColorStop(0, "rgba(224,162,75,0.55)"); g.addColorStop(1, "rgba(224,162,75,0)");
       ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 14, 0, 6.2832); ctx.fill();
       ctx.fillStyle = "rgba(236,230,219,0.9)"; ctx.beginPath(); ctx.arc(x, y, 1.6, 0, 6.2832); ctx.fill();
     }
-    // nodes
-    nodes.forEach(function (n) {
-      ctx.fillStyle = "rgba(179,170,155,0.35)";
-      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, 6.2832); ctx.fill();
-    });
+    nodes.forEach(function (n) { ctx.fillStyle = "rgba(179,170,155,0.35)"; ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, 6.2832); ctx.fill(); });
   }
-
   var last = 0;
   function loop(ts) {
-    if (ts - last > 200) { spawn(); last = ts; }
-    draw();
-    requestAnimationFrame(loop);
+    if (ts - last > 200) { if (pulses.length < 18 && edges.length) { pulses.push({ e: edges[(pulses.length * 3 + 1) % edges.length], t: 0, sp: 0.006 + (pulses.length % 3) * 0.002 }); } last = ts; }
+    draw(); requestAnimationFrame(loop);
   }
-
   build();
   if (reduce) { draw(); } else { requestAnimationFrame(loop); }
   var rt;

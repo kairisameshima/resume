@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Multi-Provider LLM Gateway — STAR breakdown. Kairi Sameshima.">
+<title>Multi-Provider LLM Gateway — Kairi Sameshima</title>
+<link rel="stylesheet" href="../assets/portfolio.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="../index.html">kairi<b>.</b>sameshima</a>
+    <a class="backlink" href="../index.html#work">← all work</a>
+  </div>
+</nav>
+
+<header class="proj-hero">
+  <div class="wrap">
+    <span class="cat">Platform &amp; Infra · Sole Owner</span>
+    <h1>Multi-Provider LLM Gateway</h1>
+    <p class="lede">A single relay that fronts every LLM provider behind one API — structured outputs, function calling, async job queuing, and streaming — with a cross-cloud migration and 99% test coverage.</p>
+    <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Redis</span><span class="tag">Bedrock</span><span class="tag">Gemini</span><span class="tag">Azure / OpenAI</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="star">
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">S</div><div class="word">Situation</div></div>
+      <div class="content">
+        <p>Multiple services each integrated LLM providers directly — duplicated request/response logic, inconsistent error handling and retries, and mounting <strong>provider lock-in risk</strong>. Every new model or provider meant touching several codebases.</p>
+      </div>
+    </div>
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">T</div><div class="word">Task</div></div>
+      <div class="content">
+        <p>Own a single gateway that unifies all providers behind one stable API, so downstream services integrate once and switch models freely — and make it reliable enough to sit on the critical path.</p>
+      </div>
+    </div>
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">A</div><div class="word">Action</div></div>
+      <div class="content">
+        <p>Unified Anthropic (Bedrock), Google Gemini, and Azure/OpenAI behind one API supporting structured outputs, function calling, async job queuing, and Redis-Streams SSE.</p>
+        <ul>
+          <li>Led a cross-cloud migration of the relay, consolidating provider access and infrastructure.</li>
+          <li>Drove the service to <strong>99% test coverage (665 tests)</strong> with hermetic isolation — every external call patched — eliminating suite flakiness.</li>
+          <li>Diagnosed and fixed a production memory leak and added worker recycling with jitter to stabilize the service under sustained load.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">R</div><div class="word">Result</div></div>
+      <div class="content">
+        <p>One reliable relay for all LLM traffic across the fleet: services integrate once, swap models without code changes, and the gateway stays stable under load — 99% covered and hardened against the failure modes that had bitten it before.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="detail-nav">
+    <a href="source-verification.html">← Source Verification</a>
+    <a href="monitoring.html">next: AI Monitoring →</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 Kairi Sameshima</span><span>STAR breakdown</span></div>
+</footer>
+
+<script>
+(function(){var r=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;var els=document.querySelectorAll(".reveal");if("IntersectionObserver"in window&&!r){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:0.12});els.forEach(function(e){io.observe(e);});}else{els.forEach(function(e){e.classList.add("in");});}})();
+</script>
+</body>
+</html>

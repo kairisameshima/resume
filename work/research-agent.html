@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Agentic Research Agent — STAR breakdown. Kairi Sameshima.">
+<title>Agentic Research Agent — Kairi Sameshima</title>
+<link rel="stylesheet" href="../assets/portfolio.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="../index.html">kairi<b>.</b>sameshima</a>
+    <a class="backlink" href="../index.html#work">← all work</a>
+  </div>
+</nav>
+
+<header class="proj-hero">
+  <div class="wrap">
+    <span class="cat">AI &amp; Retrieval · Primary Owner</span>
+    <h1>Agentic Research Agent</h1>
+    <p class="lede">An agentic research service that answers financial and open-domain questions by autonomously orchestrating multi-turn tool calls, then streams cited, verifiable answers.</p>
+    <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">Temporal</span><span class="tag">Claude / Bedrock</span><span class="tag">SSE</span><span class="tag">Redis</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="star">
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">S</div><div class="word">Situation</div></div>
+      <div class="content">
+        <p>The product needed to answer complex financial and open-domain questions with <strong>cited, trustworthy evidence</strong> — which requires autonomous, multi-source retrieval rather than a single LLM call. An early serverless prototype proved the idea but couldn't scale to production reliability or observability.</p>
+      </div>
+    </div>
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">T</div><div class="word">Task</div></div>
+      <div class="content">
+        <p>Own the service end-to-end and take it from prototype to a scalable, observable, production-grade architecture — retrieval quality, latency, and deployment included.</p>
+      </div>
+    </div>
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">A</div><div class="word">Action</div></div>
+      <div class="content">
+        <p>Built an agentic loop that orchestrates multi-turn tool calls across SEC filings, market-data providers, and web search, streaming cited answers over SSE with <strong>character-level citation anchoring</strong> and quick/deep LLM modes.</p>
+        <ul>
+          <li>Migrated the service from the serverless prototype to a Temporal multi-worker pipeline with per-tool retry policies and large-payload offload.</li>
+          <li>Instrumented per-activity latency, diagnosed a concurrency cliff under parallel load, and tuned worker pools to resolve it — guided by a custom load-test harness.</li>
+          <li>Built a DynamoDB-backed evaluation framework tracking response quality across backend versions, plus CI quality gates and multi-environment deploy pipelines.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">R</div><div class="word">Result</div></div>
+      <div class="content">
+        <p>A production-capable research agent with measured latency, an eval framework that turns quality into a regression-testable metric, and a hardened deployment pipeline — the retrieval engine other verification products build on.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="detail-nav">
+    <a href="temporal.html">← Temporal Platform</a>
+    <a href="source-verification.html">next: Source Verification →</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 Kairi Sameshima</span><span>STAR breakdown</span></div>
+</footer>
+
+<script>
+(function(){var r=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;var els=document.querySelectorAll(".reveal");if("IntersectionObserver"in window&&!r){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:0.12});els.forEach(function(e){io.observe(e);});}else{els.forEach(function(e){e.classList.add("in");});}})();
+</script>
+</body>
+</html>

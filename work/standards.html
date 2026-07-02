@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Standards as Tooling — STAR breakdown. Kairi Sameshima.">
+<title>Standards as Tooling — Kairi Sameshima</title>
+<link rel="stylesheet" href="../assets/portfolio.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="../index.html">kairi<b>.</b>sameshima</a>
+    <a class="backlink" href="../index.html#work">← all work</a>
+  </div>
+</nav>
+
+<header class="proj-hero">
+  <div class="wrap">
+    <span class="cat">Tooling &amp; Standards · Author / Maintainer</span>
+    <h1>Standards as Tooling</h1>
+    <p class="lede">Turning engineering standards from unread documents into things engineers actually run — specs, scaffolds, and agent plugins that audit and generate against the rules.</p>
+    <div class="tags"><span class="tag">TypeScript</span><span class="tag">AWS CDK</span><span class="tag">CLI</span><span class="tag">Claude Code</span><span class="tag">Templates</span><span class="tag">Pre-commit</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="star">
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">S</div><div class="word">Situation</div></div>
+      <div class="content">
+        <p>In a fast-moving startup, engineering standards live in wikis nobody reads, and each engineer is heavily leveraged across multiple services — so there's no structural moment for knowledge to disperse. The result is drift: every service solves the same problems differently, and quality depends on who wrote it.</p>
+      </div>
+    </div>
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">T</div><div class="word">Task</div></div>
+      <div class="content">
+        <p>Make standards <strong>executable</strong> — encode them where engineers already work (the toolchain and the agent layer) so compliance is the path of least resistance rather than an act of discipline.</p>
+      </div>
+    </div>
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">A</div><div class="word">Action</div></div>
+      <div class="content">
+        <p>Authored the reference specifications — a Temporal standard and a config-driven CDK standard — then built the tooling that enforces and applies them:</p>
+        <ul>
+          <li>A new-service scaffold template that generates a standard-compliant service (orchestration module, IaC, local dev stack) from day one — turning bootstrap from days into a generated starting point.</li>
+          <li>Internal Claude Code plugins that <strong>audit, check, and scaffold</strong> against the specs — so a standard violation is caught at review or generation time, not discovered in production.</li>
+          <li>Config-driven CDK adoption across services, replacing per-service infra improvisation with one referenced pattern.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">R</div><div class="word">Result</div></div>
+      <div class="content">
+        <p>Standards moved out of docs and into the tools engineers run — enforced at PR and scaffold time rather than by memory. New services start compliant; existing ones can be audited against the spec on demand. This is the core of how I bridge the v1→v2 gap: <strong>encode quality into the agent layer instead of relying on ceremony or seniority.</strong></p>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="detail-nav">
+    <a href="monitoring.html">← AI Monitoring</a>
+    <a href="../index.html#work">all work →</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 Kairi Sameshima</span><span>STAR breakdown</span></div>
+</footer>
+
+<script>
+(function(){var r=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;var els=document.querySelectorAll(".reveal");if("IntersectionObserver"in window&&!r){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:0.12});els.forEach(function(e){io.observe(e);});}else{els.forEach(function(e){e.classList.add("in");});}})();
+</script>
+</body>
+</html>
