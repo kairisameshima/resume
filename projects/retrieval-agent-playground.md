@@ -4,9 +4,9 @@ slug: retrieval-agent-playground
 name: Retrieval Agent (Research Agent)
 employer: Farsight AI
 role: primary owner
-period: 2025-09 — 2026-07
+period: 2025-09 — 2026-08
 status: active
-commits_by_kairi: 429
+commits_by_kairi: 536
 primary_languages: [Python, TypeScript]
 technologies: [FastAPI, Temporal, AWS Bedrock, Claude (Sonnet 4 / Opus 4), AWS CDK, ECS Fargate, ElastiCache Redis, DynamoDB, AWS Secrets Manager, AWS KMS, AWS WAF, CloudWatch, AWS ECR, Cohere, SEC EDGAR, Exa, S3, Sentry, Langfuse, auditry/structlog, Poetry, ruff, ty (astral), trivy, GitHub Actions]
 domains: [agentic-retrieval, financial-research, LLM-orchestration, streaming-APIs, observability, eval-infra, cloud-infra, security, reliability / DR]
@@ -44,6 +44,11 @@ Drove the research-agent's own prod-readiness gauntlet — the security, reliabi
 - **Observability:** prod CloudWatch saturation alarms + SNS on-call topic (DEV-1311), 90-day ECS log-group retention (DEV-1312).
 - **Networking (DEV-1343):** joined the research-agent to the Service Connect mesh for cross-service OAuth access.
 - **Trace hygiene (DEV-1258):** upserted Langfuse traces so workflow runs are no longer orphaned in observability.
+
+### OAuth2 / gateway-identity integration (August 2026)
+- Joined the OAuth2 Token Service's delegation-grant flow as a named consumer: derived `user_id` from the verified gateway JWT rather than a client-supplied value, made identity verification fail closed when nothing can verify it, and made the startup path actually fail at startup instead of degrading silently.
+- Added a stage-neutral Service Connect name so a sandbox "slug" deployment can opt into the shared mesh by ARN and reach both the oauth2 service and Bedrock without per-slug hardcoding.
+- Cleared a recurring prod SCA gate failure by deleting the manifest that kept re-triggering it, and consolidated PostHog configuration out of the vendor secret and into a single source.
 
 ## Technologies & patterns
 

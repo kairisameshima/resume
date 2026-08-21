@@ -4,9 +4,9 @@ slug: temporal
 name: Temporal Standard & Shared Platform
 employer: Farsight AI
 role: author / infrastructure & platform lead
-period: 2025-10 — 2026-06
+period: 2025-10 — 2026-08
 status: active
-commits_by_kairi: 98
+commits_by_kairi: 111
 primary_languages:
   - TypeScript
   - Python
@@ -65,6 +65,10 @@ Sole author of the Temporal standard and primary owner of the shared platform. I
 - **Observability baseline:** 90-day log retention + CloudWatch alarms with synth assertions and mode-gated service-health alarms (DEV-1228, PR #22).
 - **Adopted the shared-infra bastion standard**, dropping the dedicated bastion (DEV-1254, PR #16).
 - Authored the **greenfield deploy/teardown runbook** and a **Security Production Readiness Worksheet**, correcting both to match deployed CDK reality rather than aspirational posture.
+
+### Post-migration hardening (July–August 2026)
+- Added a blue/green production deployment path (`allowProdSlug`) so a slugged prod stack can run alongside the live one during migrations, and scoped RDS KMS alias naming by resource prefix rather than stage.
+- Shipped Temporal server and SDK worker metrics into the sandbox Prometheus workspace: mirrored the metrics collector to ECR instead of pulling from ECR Public, gave each replica its own series (a shared series silently produced wrong rates), and tuned the scrape interval per data source (server every 60s, worker every 15s).
 
 ## Technologies & patterns
 

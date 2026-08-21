@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="OAuth2 Token Service — STAR breakdown. Kairi Sameshima.">
+<title>OAuth2 Token Service — Kairi Sameshima</title>
+<link rel="stylesheet" href="../assets/portfolio.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="../index.html">kairi<b>.</b>sameshima</a>
+    <a class="backlink" href="../index.html#work">← all work</a>
+  </div>
+</nav>
+
+<header class="proj-hero">
+  <div class="wrap">
+    <span class="cat">Platform &amp; Infra · Primary Contributor</span>
+    <h1>OAuth2 Token Service</h1>
+    <p class="lede">Co-designed and shipped a production delegated-authorization service so other services can act on a user's third-party vendor connection without ever touching the vendor's tokens.</p>
+    <div class="tags"><span class="tag">FastAPI</span><span class="tag">AWS KMS</span><span class="tag">AWS CDK</span><span class="tag">PostgreSQL</span><span class="tag">Redis</span><span class="tag">OAuth2</span></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="star">
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">S</div><div class="word">Situation</div></div>
+      <div class="content">
+        <p>A downstream research service needed to act on a user's connected third-party data vendor account (PitchBook), but no service should ever hold or pass around that vendor's raw OAuth tokens. The service also had to go from a JWT-only rework through a scattered multi-stack deployment model to something that could actually take production traffic.</p>
+      </div>
+    </div>
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">T</div><div class="word">Task</div></div>
+      <div class="content">
+        <p>Co-design a way for other services to use a vendor connection <strong>without holding the vendor's tokens</strong>, protect the tokens the service does have to store, and consolidate the deployment into something that could pass a production-readiness gate.</p>
+      </div>
+    </div>
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">A</div><div class="word">Action</div></div>
+      <div class="content">
+        <p>Designed and shipped a delegation-grant model: short-lived, mintable/redeemable/renewable grants that stand in for the vendor's OAuth tokens across the service boundary, with return-origin parameters enforced on every route.</p>
+        <ul>
+          <li>Envelope-encrypted stored vendor tokens with a dedicated KMS customer-managed key, task-role-only decrypt grants, and a fail-closed refresh path if the key becomes unreachable.</li>
+          <li>Consolidated a "frozen stack + per-slug stacks" deployment model into one CDK stack per stage, then retired the legacy stack.</li>
+          <li>Led the security-gate hardening that unblocked production promotion — clearing dependency, secret-scan, and SBOM advisories, and stopping vendor errors from chaining into Sentry.</li>
+          <li>Diagnosed a vendor-specific failure mode — the vendor's refresh window is an absolute deadline from connect time, not one that slides on renewal — and shipped a renewal strategy that serves the still-valid token instead of failing the caller.</li>
+          <li>Found and closed a live secret leak: delegation grants were reaching Sentry on an error path. Added redaction plus a test guarding the boundary.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="star-block reveal">
+      <div class="tag-col"><div class="letter">R</div><div class="word">Result</div></div>
+      <div class="content">
+        <p>The service reached production on 2026-08-05 with the research agent as its first live consumer. Vendor tokens never leave the service boundary, storage is encrypted end-to-end, and a vendor-side quirk that would otherwise intermittently fail user requests is handled transparently.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="detail-nav">
+    <a href="standards.html">← Standards as Tooling</a>
+    <a href="../index.html#work">all work →</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 Kairi Sameshima</span><span>STAR breakdown</span></div>
+</footer>
+
+<script>
+(function(){var r=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;var els=document.querySelectorAll(".reveal");if("IntersectionObserver"in window&&!r){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:0.12});els.forEach(function(e){io.observe(e);});}else{els.forEach(function(e){e.classList.add("in");});}})();
+</script>
+</body>
+</html>

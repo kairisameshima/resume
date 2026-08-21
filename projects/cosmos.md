@@ -4,9 +4,9 @@ slug: cosmos
 name: Cosmos (Service Scaffold Template)
 employer: Farsight AI
 role: author / maintainer
-period: 2025-12 — 2026-04
+period: 2025-12 — 2026-07
 status: active
-commits_by_kairi: 18
+commits_by_kairi: 44
 primary_languages:
   - Python
   - TypeScript
@@ -49,6 +49,7 @@ Primary author and maintainer. Drove the template from initial scaffolding throu
 - Replaced Black with Ruff for formatting and added pre-commit hooks with reproducible `rev` pinning; bumped Ruff to v0.15.4 and corrected the post-gen error messaging.
 - Added the `Annotated CurrentUser` dependency-injection type alias pattern to the auth module, reducing boilerplate in route signatures across generated services.
 - Aligned generated CDK stacks with the secure-parameters pattern (SSM-backed secrets, no plaintext in task definitions).
+- **Deployed the template for the first time in sandbox as a live canary (2026-07-06)** rather than trusting it unverified — the deploy surfaced 5 real deployability bugs (entrypoint, IAM probe, Alembic, Sentry placeholder, SSM naming collision), all fixed the same day.
 
 ## Technologies & patterns
 
@@ -66,3 +67,4 @@ Primary author and maintainer. Drove the template from initial scaffolding throu
 - Designed env-var fallback chains in generated services so the same binary runs locally (env vars), in Docker (Compose-injected vars), and in ECS (SSM Parameter Store) without code changes.
 - Replaced Black with Ruff in the scaffold template and wired pre-commit hooks with pinned revs, standardizing linting across every service generated from Cosmos.
 - Implemented conditional Jinja2 template rendering and post-generation pruning so the scaffold emits only the infrastructure components (DB, auth, EventBridge, Temporal) that a service actually opts into.
+- Ran the scaffold's first real sandbox deployment as a canary rather than shipping it unverified, which surfaced and let me fix 5 deployability bugs the template's tests had missed.

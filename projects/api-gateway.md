@@ -4,9 +4,9 @@ slug: api-gateway
 name: API Gateway
 employer: Farsight AI
 role: contributor (ops, routing, WAF hardening)
-period: 2025-08 — 2026-04
+period: 2025-08 — 2026-08
 status: active
-commits_by_kairi: 33
+commits_by_kairi: 57
 primary_languages: [TypeScript]
 technologies: [Node.js, Effect.ts, WorkOS, JWT, AWS SSM, Sentry, Docker, AWS CDK, Vitest, pnpm]
 domains: [authentication, reverse proxy, request forwarding, session management, WAF configuration, microservice routing]
@@ -28,6 +28,8 @@ Contributor responsible for critical request-forwarding correctness fixes, WAF p
 - Added the reslide microservice endpoint and updated API endpoint URLs as services migrated to private DNS
 - Added chat microservice route with support for unauthenticated health endpoint, enabling the chat service to integrate with the platform auth layer
 - Enhanced logging, request tracing, and microservices configuration at project inception (2025-08), establishing the correlation ID pattern used across all distributed request traces
+- Published the gateway's Service Connect security-group ID to SSM (DEV-1401) so behind-gateway services can accept ingress from the gateway without a public ALB, and onboarded the new oauth2 and research-agent services onto that pattern
+- Diagnosed and fixed a mis-registered oauth2 service discovery alias that broke routing after a config change, then reverted and re-routed to the correct Service Connect alias
 
 ## Technologies & patterns
 - **Effect.ts functional core**: HTTP server and client abstraction built on `@effect/platform` with typed error channels, eliminating unhandled promise rejections in the forwarding layer

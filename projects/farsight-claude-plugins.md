@@ -4,9 +4,9 @@ slug: farsight-claude-plugins
 name: Farsight Claude Code Plugins
 employer: Farsight AI
 role: author / maintainer
-period: 2026-04 — 2026-06
+period: 2026-04 — 2026-08
 status: active
-commits_by_kairi: 16
+commits_by_kairi: 18
 primary_languages:
   - Markdown
   - TypeScript

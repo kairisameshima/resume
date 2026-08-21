@@ -1,6 +1,6 @@
 ---
 type: accomplishments
-updated: 2026-07-01
+updated: 2026-08-21
 ---
 
 # Highlights
@@ -28,6 +28,15 @@ Cross-project, quantified, interview-defensible. Each highlight links to the pro
 ## Production readiness & security (staff-IC signal)
 - **Led two full production-readiness campaigns in H1 2026** — the shared Temporal platform (DEV-1183→DEV-1267) and the research agent (DEV-1297→DEV-1362, a 37-ticket Linear project) — applying a consistent hardening playbook across both: KMS CMK encryption at rest, Secrets Manager credential rotation, per-service least-privilege IAM, WAF/CORS lockdown, CI SCA/SBOM/secret-scan gates, deploy-by-digest with test-gated promotion, Multi-AZ failover recovery, and ECS deployment circuit breakers. → `projects/temporal.md`, `projects/retrieval-agent-playground.md`
 - **Diagnosed a non-obvious platform failure mode** — RDS Multi-AZ failover wedges the Temporal cluster because history shards can't reacquire — and shipped automated log-alarm-driven failover recovery rather than relying on cluster self-heal. → `projects/temporal.md`
+
+## Authentication & delegated authorization
+- **Co-designed and shipped a production OAuth2 delegated-authorization service** — short-lived internal "delegation grants" let downstream services act on a user's third-party vendor connection (PitchBook) without ever touching vendor tokens; second-highest committer (153 commits) on a service that reached production 2026-08-05. → `projects/oauth2_token_service.md`
+- **Designed the token-encryption security boundary** — per-deployment KMS CMK envelope encryption, task-role-only decrypt, fail-closed refresh on key unavailability — and led the dependency/secret-scan hardening pass that gated the production launch. → `projects/oauth2_token_service.md`
+- **Diagnosed a vendor-specific OAuth failure mode** (PitchBook's token-refresh window is an absolute deadline from connect time, not sliding on renewal) and found/closed a live secret leak of delegation grants into Sentry. → `projects/oauth2_token_service.md`
+
+## Data infrastructure
+- **Built the ingestion backbone of an append-only, event-sourced provenance system** (top committer, 105 commits) — API Gateway → JWT-authorized validator Lambda → Firehose → S3/Glue Parquet lake with Athena dedupe-on-read views. → `projects/mega-city-one.md`
+- **Proved a throughput/scalability claim with a purpose-built load-test harness** (live dashboard, real WorkOS auth path) instead of shipping it unverified, then hardened the ingest path with poison-record rejection and partial-accept batch semantics for production traffic. → `projects/mega-city-one.md`
 
 ## Testing & quality
 - **Drove API Relay to 99% test coverage (665 tests)** with hermetic isolation — all external I/O patched — eliminating flakiness in the suite. → `projects/api-relay.md`

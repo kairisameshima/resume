@@ -44,7 +44,7 @@
         <div class="reveal">
           <p>I'm a senior backend engineer specializing in <strong>production Python for AI/LLM systems</strong> — retrieval agents, source verification, and the gateway layer that fronts them. Seven-plus years across startups and agencies, with a consistent through-line: Domain-Driven Design, workflow orchestration, and developer-productivity tooling.</p>
           <p>At Farsight AI I own several services end-to-end and deliberately work the <strong>v1→v2 quality bridge</strong> — the gap where most startup MVPs die. My bet is that engineering quality is a <strong>tooling and standards problem, not a meeting problem</strong>: I'd rather encode a pattern into a scaffold, a CI gate, or an agent plugin than write another doc no one reads.</p>
-          <p>Lately that's meant authoring a company-wide Temporal standard and driving a shared workflow platform to production-grade security and reliability — the unglamorous foundation everything else runs on.</p>
+          <p>Lately that's meant authoring a company-wide Temporal standard and driving a shared workflow platform to production-grade security and reliability, then co-designing a delegated-authorization service that shipped to production in August 2026 — the unglamorous foundation everything else runs on.</p>
         </div>
         <dl class="side reveal">
           <dt>// role</dt><dd>Senior Backend Engineer</dd>
@@ -116,6 +116,14 @@
           <div class="tags"><span class="tag">TypeScript</span><span class="tag">AWS CDK</span><span class="tag">CLI</span><span class="tag">Claude Code</span></div>
         </a>
 
+        <a class="card reveal" href="work/oauth2.html" data-cat="platform">
+          <span class="cat">Platform &amp; Infra</span>
+          <h3>OAuth2 Token Service</h3>
+          <p>Co-designed and shipped a production delegated-authorization service: short-lived internal grants let downstream services act on a user's third-party vendor connection without ever touching the vendor's tokens, protected by per-deployment KMS envelope encryption.</p>
+          <p class="more">View STAR breakdown →</p>
+          <div class="tags"><span class="tag">FastAPI</span><span class="tag">OAuth2</span><span class="tag">AWS KMS</span><span class="tag">AWS CDK</span></div>
+        </a>
+
       </div>
     </div>
   </section>
@@ -132,6 +140,7 @@
             <ul>
               <li>Own a research / retrieval / verification microservice stack end-to-end — the research agent, source-checker, monitoring, and email services.</li>
               <li>Authored the company-wide Temporal standard and drove the shared workflow platform to production-grade security and reliability.</li>
+              <li>Co-designed and shipped a delegated-authorization OAuth2 service to production, including its token-encryption security model.</li>
               <li>Encode engineering standards into reusable tooling — service scaffolds, config-driven CDK, and internal Claude Code plugins.</li>
             </ul>
           </div>
