@@ -4,7 +4,7 @@ slug: api-gateway
 name: API Gateway
 employer: Farsight AI
 role: contributor (ops, routing, WAF hardening)
-period: 2025-08 — 2026-08
+period: 2025-08 — 2026-09
 status: active
 commits_by_kairi: 57
 primary_languages: [TypeScript]
@@ -19,7 +19,7 @@ visibility: internal
 A TypeScript reverse-proxy and authentication gateway that served as the central entry point for the Farsight AI microservices platform. It authenticated users through WorkOS (SSO, magic links, OTP, OAuth providers), managed sealed-cookie and token-mode sessions, injected short-lived JWTs into upstream requests, and routed traffic to downstream services including vault, monitor, chat-gateway, source-checker, and reslide.
 
 ## My role & ownership
-Contributor responsible for critical request-forwarding correctness fixes, WAF policy management, and microservice onboarding. Maintained the routing layer as new services were added to the platform.
+Contributor responsible for critical request-forwarding correctness fixes, WAF policy management, and microservice onboarding. Maintained the routing layer as new services were added to the platform. In 2026-09 designed its serverless replacement, which moved to its own repo (see `projects/auth-gateway.md`).
 
 ## Key contributions
 - Fixed a body-forwarding bug on DELETE requests (DEV-885): the gateway silently dropped request bodies on DELETE, breaking downstream services that relied on them; fixed at both the forwarder layer and the incoming-body read path
@@ -30,6 +30,7 @@ Contributor responsible for critical request-forwarding correctness fixes, WAF p
 - Enhanced logging, request tracing, and microservices configuration at project inception (2025-08), establishing the correlation ID pattern used across all distributed request traces
 - Published the gateway's Service Connect security-group ID to SSM (DEV-1401) so behind-gateway services can accept ingress from the gateway without a public ALB, and onboarded the new oauth2 and research-agent services onto that pattern
 - Diagnosed and fixed a mis-registered oauth2 service discovery alias that broke routing after a config change, then reverted and re-routed to the correct Service Connect alias
+- Added a dev-only endpoint that mints gateway-style JWTs for the Breachlock penetration test (DEV-1485, PR #127)
 
 ## Technologies & patterns
 - **Effect.ts functional core**: HTTP server and client abstraction built on `@effect/platform` with typed error channels, eliminating unhandled promise rejections in the forwarding layer
