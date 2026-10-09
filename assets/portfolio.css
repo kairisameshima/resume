@@ -80,8 +80,10 @@ section { padding: 96px 0; border-top: 1px solid var(--line); }
 .filter:hover { color: var(--text); border-color: var(--text-3); }
 .filter.active { color: var(--ink); background: var(--amber); border-color: var(--amber); font-weight: 600; }
 
-.work { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-@media (max-width: 760px) { .work { grid-template-columns: 1fr; } }
+.work, .lessons { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+@media (max-width: 760px) { .work, .lessons { grid-template-columns: 1fr; } }
+.lessons-intro { color: var(--text-2); max-width: 62ch; margin: 0 0 26px; }
+.card code { font-family: var(--mono); font-size: 13px; color: var(--text); }
 .card { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 26px 26px 22px;
   display: flex; flex-direction: column; color: var(--text); transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease; }
 a.card:hover { transform: translateY(-4px); border-color: var(--amber-dim); box-shadow: 0 14px 40px -20px rgba(0,0,0,.8); color: var(--text); }
